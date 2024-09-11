@@ -12,10 +12,6 @@ namespace PraktilineTööMadu
         public int y; // Обьеденение трех переменных в ноый тип данных
         public char sym;
 
-        public Point()
-        {
-        }
-
         public Point(int _x, int _y, char _sym)
         {
             x = _x;
@@ -23,12 +19,44 @@ namespace PraktilineTööMadu
             sym = _sym;
         }
 
+        public Point(Point p)
+        {
+            x = p.x;
+            y = p.y;
+            sym = p.sym;
+        }
+
+        public void Move(int, offset, Direction direction)
+        {
+            if (direction == Direction.RIGHT)
+            {
+                x = x + offset;
+            }
+            else if (direction == Direction.LEFT)
+            {
+                x = x - offset;
+            }
+            else if (direction == Direction.UP)
+            {
+                x = x + offset;
+            }
+            else if (direction == Direction.DOWN)
+            {
+                x = x - offset;
+            }
+        }
         public void Draw()
         {
             Console.SetCursorPosition(x, y);
             Console.Write( sym );
         }
+
+        public override string ToString()
+        {
+            return x + ', ', + ', ' + sym;
+        }
     }
 }
+
 
 //Console.WriteLine("Luuakse uus punkt");

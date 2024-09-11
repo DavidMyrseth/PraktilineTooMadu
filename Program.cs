@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PraktilineTööMadu;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -20,44 +21,76 @@ using System.Threading.Tasks;
 
 
 // Седьмой урок работа с классами 
-// Класс состоит из трех составляющих данные, КОНСТРУКТОР (метод) и Обьекты.
+// Класс состоит из трех составляющих данные, КОНСТРУКТОР (метод) и обьекты.
+
+// Восьмой урок работа с прицепом Наследование. Наследование это свойство системы писать новый класс на основе уже существующего.
+
+// Девятый урок
+
 namespace PraktilineTööMadu
 {
     class Program
     {
         static void Main(string[] args)
         {
-            Point p1 = new Point(1, 3, '*'); // Класс с точкой // Конструктор который принимает 3 переменных и имеет метод вывода на экран.
-                                             // (Инкомпцуляция -> свойства системы обьединить данныe с методами в классе).
-            p1.Draw();
+            Console.SetWindowSize( 80, 25 );
 
-            Point p2 = new Point(4, 5, '#');
-            p2.Draw();
+            //  Отрисовка рамочки
+            HorizontalLine upLine = new HorizontalLine(0, 78, 0, '+');
+            HorizontalLine downLine = new HorizontalLine(0, 78, 24, '+');
+            VerticalLine leftLine = new VerticalLine(0, 24, 0, '+');
+            VerticalLine rightLine = new VerticalLine(0, 24, 78, '+');
+            upLine.Drow();
+            downLine.Drow();
+            leftLine.Drow();
+            rightLine.Drow();
 
-            List<int> numlist = new List<int>();
-            numlist.Add(0);
-            numlist.Add(1);
-            numlist.Add(2);
-
-            int x = numlist[ 0 ];
-            int y = numlist[ 1 ];
-            int z = numlist[ 2 ];
-
-            foreach (int i in numlist)
-            {
-                Console.WriteLine( i );
-            }
-
-            numlist.Remove( 0 );
-
-            List<Point> plist = new List<Point>();
-            plist.Add(p1);
-            plist.Add(p2);
-
-            Console.ReadLine();
+            // Отрисовка точек
+            Point p = new Point( 4, 5, '+');
+            Snake snake = new Snake( p, 4, Direction.RIGHT );
         }
     }
 }
+
+//Кусок кода из девятого урока
+//p.Draw();
+
+
+// Кусок кода из седьмого урока
+//Point p1 = new Point(1, 3, '*'); // Класс с точкой // Конструктор который принимает 3 переменных и имеет метод вывода на экран.
+//                                 // (Инкомпцуляция -> свойства системы обьединить данныe с методами в классе).
+//p1.Draw();
+
+//Point p2 = new Point(4, 5, '#');
+//p2.Draw();
+
+//HorizontalLine line = new HorizontalLine(5, 10, 8, '+');
+//line.Drow();
+
+//Console.ReadLine();
+
+
+// Кусок кода из шестого урока
+//List<int> numlist = new List<int>();
+//numlist.Add(0);
+//numlist.Add(1);
+//numlist.Add(2);
+
+//int x = numlist[0];
+//int y = numlist[1];
+//int z = numlist[2];
+
+//foreach (int i in numlist)
+//{
+//    Console.WriteLine(i);
+//}
+
+//numlist.Remove(0);
+
+//List<Point> plist = new List<Point>();
+//plist.Add(p1);
+//plist.Add(p2);
+
 
 // Пятый урок "Комплектующие", "Стэк и Куча".
 // int x = 1;

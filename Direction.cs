@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace PraktilineTööMadu
 {
-    internal class Class1
+    enum Direction
     {
+        LEFT,
+        RIGHT,
+        UP,
+        DOWN
     }
 }
