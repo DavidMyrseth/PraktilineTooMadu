@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PraktilineTööMadu
 {
-    public class Point
+    class Point
     {
         public int x;
         public int y; // Обьеденение трех переменных в ноый тип данных
@@ -26,7 +26,7 @@ namespace PraktilineTööMadu
             sym = p.sym;
         }
 
-        public void Move(int, offset, Direction direction)
+        public void Move(int offset, Direction direction)
         {
             if (direction == Direction.RIGHT)
             {
@@ -38,11 +38,11 @@ namespace PraktilineTööMadu
             }
             else if (direction == Direction.UP)
             {
-                x = x + offset;
+                y = y + offset;
             }
             else if (direction == Direction.DOWN)
             {
-                x = x - offset;
+                y = y - offset;
             }
         }
         public void Draw()
@@ -51,9 +51,9 @@ namespace PraktilineTööMadu
             Console.Write( sym );
         }
 
-        public override string ToString()
+        public override string ToString() 
         {
-            return x + ', ', + ', ' + sym;
+            return x + ", " + ", " + sym;
         }
     }
 }

@@ -8,10 +8,10 @@ namespace PraktilineTööMadu
 {
     class VerticalLine : Figure
     {
-        public VerticalLine(int yUP, int yDown, int y, char sym) // Конструктор 
+        public VerticalLine(int yUP, int yDown, int x, char sym) // Конструктор 
         {
             pList = new List<Point>();
-            for (int x = yUP; x <= yDown; x++)
+            for (int y = yUP; y <= yDown; y++)
             {
                 Point p = new Point(x, y, sym);
                 pList.Add(p);

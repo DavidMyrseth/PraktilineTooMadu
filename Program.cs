@@ -19,13 +19,14 @@ using System.Threading.Tasks;
 
 // Шестой урок работа с Инкомпсуляцией в данном случае в классе List (F12). 
 
-
 // Седьмой урок работа с классами 
 // Класс состоит из трех составляющих данные, КОНСТРУКТОР (метод) и обьекты.
 
 // Восьмой урок работа с прицепом Наследование. Наследование это свойство системы писать новый класс на основе уже существующего.
 
-// Девятый урок
+// Девятый урок отображение змейки на экране и новый принцип обстрогирование. Абстрагирование помогает сосредоточиться на интерфейсе, а детали того, как это реализовано, остаются скрытыми.
+
+// Десятый урок 
 
 namespace PraktilineTööMadu
 {
@@ -36,18 +37,22 @@ namespace PraktilineTööMadu
             Console.SetWindowSize( 80, 25 );
 
             //  Отрисовка рамочки
-            HorizontalLine upLine = new HorizontalLine(0, 78, 0, '+');
-            HorizontalLine downLine = new HorizontalLine(0, 78, 24, '+');
+            HorizontalLine topLine = new HorizontalLine(0, 78, 0, '+');
+            HorizontalLine bottomLine = new HorizontalLine(0, 78, 24, '+');
             VerticalLine leftLine = new VerticalLine(0, 24, 0, '+');
             VerticalLine rightLine = new VerticalLine(0, 24, 78, '+');
-            upLine.Drow();
-            downLine.Drow();
+            topLine.Drow();
+            bottomLine.Drow();
             leftLine.Drow();
             rightLine.Drow();
 
             // Отрисовка точек
-            Point p = new Point( 4, 5, '+');
+            Point p = new Point( 4, 5, '*');
+            p.Draw();
+            
             Snake snake = new Snake( p, 4, Direction.RIGHT );
+            snake.Drow();
+            snake.Move();
         }
     }
 }
