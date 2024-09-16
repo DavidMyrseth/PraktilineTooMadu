@@ -1,15 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace PraktilineTööMadu
 {
     class Snake : Figure
     {
-        Direction direction;
-        public Snake(Point tail, int lenght, Direction direction)
+        public Direction direction;
+        public Snake(Point tail, int lenght, Direction _direction)
         {
             direction = _direction;
             pList = new List<Point>();
@@ -33,8 +35,47 @@ namespace PraktilineTööMadu
         }
 
         public Point GetNextPoint() 
-        { 
+        {
+            Point head = pList.Last();
+            Point NextPoint = new Point ( head );
+            NextPoint.Move( 1, direction );
+            return NextPoint;
+        }
 
+        internal bool IsHitTail() 
+        {
+            var head = pList.Last();
+            for (int i = 0; i < pList.Count - 2; i++) 
+            { 
+                if (head.IsHit( pList[ i ] ) )
+                    return true;
+            }
+            return false;
+        }
+            
+        public void HandleKey(ConsoleKey key)
+        {
+            if (key == ConsoleKey.LeftArrow)
+                direction = Direction.LEFT;
+            else if (key == ConsoleKey.RightArrow)
+                direction = Direction.RIGHT;
+            else if (key == ConsoleKey.DownArrow)
+                direction = Direction.DOWN;
+            else if (key == ConsoleKey.UpArrow)
+                direction = Direction.UP;
+        }
+
+        internal bool Eat( Point food ) 
+        { 
+            Point head = GetNextPoint();
+            if ( head.IsHit( food ) )
+            {
+                food.sym = head.sym;
+                pList.Add( food );
+                return true;
+            }
+            else 
+                return false;
         }
     }
 }
@@ -44,3 +85,4 @@ namespace PraktilineTööMadu
 //{
 //    throw new NotImplementedException();
 //}
+

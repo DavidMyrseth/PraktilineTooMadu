@@ -18,8 +18,22 @@ namespace PraktilineTööMadu
                 pList.Add( p );
             }
         }
+
+        public override void Draw()
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            base.Draw();
+        }
     }
 }
+
+// 13 
+//foreach (Point p in pList)
+//{
+//    p.Draw();
+//}
+
+//Console.ForegroundColor = ConsoleColor.White;
 
 // Кусочек из восьмого урока убран так как данная информация даеться из Figure
 //List<Point> pList;

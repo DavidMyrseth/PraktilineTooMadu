@@ -5,6 +5,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 // Второй урок на этом уроке мы сделали небольшой кусок кода с процедурным подходом.
 // Принц повторяющийся куски кода и переиспользованное выноситься в отдельную функцию то есть в нашем случае в Draw.
@@ -24,9 +25,13 @@ using System.Threading.Tasks;
 
 // Восьмой урок работа с прицепом Наследование. Наследование это свойство системы писать новый класс на основе уже существующего.
 
-// Девятый урок отображение змейки на экране и новый принцип обстрогирование. Абстрагирование помогает сосредоточиться на интерфейсе, а детали того, как это реализовано, остаются скрытыми.
+// Девятый урок отображение змейки на экране и новый принцип обстрогирование. Абстрагирование помогает сосредоточиться на интерфейсе, а детали того, как это реализовано, остаются скрытыми. Создание рамки вокруг змейки
 
-// Десятый урок 
+// Десятый урок Змейка начала двигаться, сделал пару методов и узнад насколько удобно принцины инкомпсуляции  
+
+// Одинадцатый урок Змейка стала управляемой. 
+
+// Тринадцатый урок Полефамизм многообразие форм 
 
 namespace PraktilineTööMadu
 {
@@ -34,28 +39,126 @@ namespace PraktilineTööMadu
     {
         static void Main(string[] args)
         {
-            Console.SetWindowSize( 80, 25 );
-
-            //  Отрисовка рамочки
-            HorizontalLine topLine = new HorizontalLine(0, 78, 0, '+');
-            HorizontalLine bottomLine = new HorizontalLine(0, 78, 24, '+');
-            VerticalLine leftLine = new VerticalLine(0, 24, 0, '+');
-            VerticalLine rightLine = new VerticalLine(0, 24, 78, '+');
-            topLine.Drow();
-            bottomLine.Drow();
-            leftLine.Drow();
-            rightLine.Drow();
+            Walls walls = new Walls(80, 25); // Console.SetBufferSize( 80, 25 );
+            walls.Draw();
 
             // Отрисовка точек
-            Point p = new Point( 4, 5, '*');
+            Point p = new Point(4, 5, '*');
+            Snake snake = new Snake(p, 4, Direction.RIGHT);
             p.Draw();
-            
-            Snake snake = new Snake( p, 4, Direction.RIGHT );
-            snake.Drow();
-            snake.Move();
+
+            FoodCreator foodCreator = new FoodCreator(80, 25, '¤');
+            Point food = foodCreator.CreateFood();
+            food.Draw();
+
+            while (true)
+            {
+                if (walls.IsHit(snake) || snake.IsHitTail())
+                {
+                    break;
+                }
+                if (snake.Eat(food))
+                {
+                    food = foodCreator.CreateFood();
+                    food.Draw();
+                }
+                else
+                {
+                    snake.Move();
+                }
+
+                Thread.Sleep(100);
+                if (Console.KeyAvailable)
+                {
+                    ConsoleKeyInfo key = Console.ReadKey();
+                    snake.HandleKey(key.Key);
+                }
+            }
         }
     }
 }
+        
+
+//            Console.SetWindowSize( 80, 25 );
+
+//            //  Отрисовка рамочки
+//            HorizontalLine topLine = new HorizontalLine(0, 78, 0, '+');
+//            HorizontalLine bottomLine = new HorizontalLine(0, 78, 24, '+');
+//            VerticalLine leftLine = new VerticalLine(0, 24, 0, '+');
+//            VerticalLine rightLine = new VerticalLine(0, 24, 78, '+');
+//            topLine.Drow();
+//            bottomLine.Drow();
+//            leftLine.Drow();
+//            rightLine.Drow();
+
+//            // Отрисовка точек
+//            Point p = new Point( 4, 5, '*');
+//            Snake snake = new Snake( p, 4, Direction.RIGHT );
+//            p.Draw();
+
+//            FoodCreator foodCreator = new FoodCreator(80, 25, '¤');
+//            Point food = foodCreator.CreateFood();
+//            food.Draw();
+
+//            while(true) 
+//            {
+//                if (snake.Eat( food ))
+//                {
+//                    food = foodCreator.CreateFood();
+//                    food.Draw();
+//                }
+//                else
+//                {
+//                    snake.Move();
+//                }
+
+//                Thread.Sleep(100);
+
+//                if (Console.KeyAvailable)
+//                {
+//                    ConsoleKeyInfo key = Console.ReadKey();
+//                    snake.HandleKey( key.Key );
+//                }
+//            }
+//        }
+//    }
+//}
+
+
+
+
+//Кусок кода из одинацатого урока
+
+//while (true)
+//{
+//    if (Console.KeyAvailable)
+//    {
+//        ConsoleKeyInfo key = Console.ReadKey();
+//        snake.HandleKey(key.Key);
+//    }
+//    Thread.Sleep(100);
+//    snake.Move();
+
+//Snake snake = new Snake(p, 4, Direction.RIGHT);
+//snake.Drow();
+//snake.Move();
+//Thread.Sleep(300);
+//snake.Move();
+//Thread.Sleep(300);
+//snake.Move();
+//Thread.Sleep(300);
+//snake.Move();
+//Thread.Sleep(300);
+//snake.Move();
+//Thread.Sleep(300);
+//snake.Move();
+//Thread.Sleep(300);
+//snake.Move();
+//Thread.Sleep(300)
+//snake.Move();
+//Thread.Sleep(300);
+//snake.Move();
+
 
 //Кусок кода из девятого урока
 //p.Draw();
