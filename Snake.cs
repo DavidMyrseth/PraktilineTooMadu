@@ -1,21 +1,22 @@
-﻿using System;
+﻿using PraktilineTööMadu;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
-using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 
 namespace PraktilineTööMadu
 {
-    class Snake : Figure
+    internal class Snake : Figure
     {
-        public Direction direction;
-        public Snake(Point tail, int lenght, Direction _direction)
+        Direction direction;
+        public Snake(Point tail, int length, Direction _direction)
         {
             direction = _direction;
             pList = new List<Point>();
-            for (int i = 0; i < lenght; i++)
+            for (int i = 0; i < length; i++)
             {
                 Point p = new Point(tail);
                 p.Move(i, direction);
@@ -26,33 +27,31 @@ namespace PraktilineTööMadu
         internal void Move()
         {
             Point tail = pList.First();
-            pList.Remove( tail );
+            pList.Remove(tail);
             Point head = GetNextPoint();
-            pList.Add( head );
+            pList.Add(head);
 
             tail.Clear();
-            head.Draw();
+            head.Draw(head.x, head.y, head.sym);
         }
-
-        public Point GetNextPoint() 
+        public Point GetNextPoint()
         {
             Point head = pList.Last();
-            Point NextPoint = new Point ( head );
-            NextPoint.Move( 1, direction );
-            return NextPoint;
+            Point nextPoint = new Point(head);
+            nextPoint.Move(1, direction);
+            return nextPoint;
         }
 
-        internal bool IsHitTail() 
+        internal bool IsHitTail()
         {
             var head = pList.Last();
-            for (int i = 0; i < pList.Count - 2; i++) 
-            { 
-                if (head.IsHit( pList[ i ] ) )
+            for (int i = 0; i < pList.Count - 2; i++)
+            {
+                if (head.IsHit(pList[i]))
                     return true;
             }
             return false;
         }
-            
         public void HandleKey(ConsoleKey key)
         {
             if (key == ConsoleKey.LeftArrow)
@@ -64,17 +63,16 @@ namespace PraktilineTööMadu
             else if (key == ConsoleKey.UpArrow)
                 direction = Direction.UP;
         }
-
-        internal bool Eat( Point food ) 
-        { 
+        internal bool Eat(Point food)
+        {
             Point head = GetNextPoint();
-            if ( head.IsHit( food ) )
+            if (head.IsHit(food))
             {
                 food.sym = head.sym;
-                pList.Add( food );
+                pList.Add(food);
                 return true;
             }
-            else 
+            else
                 return false;
         }
     }

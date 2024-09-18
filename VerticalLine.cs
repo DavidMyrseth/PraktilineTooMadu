@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PraktilineTööMadu;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace PraktilineTööMadu
 {
-    class VerticalLine : Figure
+    internal class VerticalLine : Figure
     {
-        public VerticalLine(int yUP, int yDown, int x, char sym) // Конструктор 
+        public VerticalLine(int yUp, int yDown, int x, char sym)
         {
             pList = new List<Point>();
-            for (int y = yUP; y <= yDown; y++)
+            for (int y = yUp; y <= yDown; y++)
             {
                 Point p = new Point(x, y, sym);
                 pList.Add(p);

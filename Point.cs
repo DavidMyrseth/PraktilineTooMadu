@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PraktilineTööMadu;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,11 +7,13 @@ using System.Threading.Tasks;
 
 namespace PraktilineTööMadu
 {
-    class Point
+    internal class Point
     {
         public int x;
-        public int y; // Обьеденение трех переменных в ноый тип данных
+        public int y;
         public char sym;
+
+        public Point() { }
 
         public Point(int _x, int _y, char _sym)
         {
@@ -48,23 +51,24 @@ namespace PraktilineTööMadu
 
         public bool IsHit(Point p)
         {
-            return p.x == x && p.y == this.y;
+            return p.x == this.x && p.y == this.y;
         }
 
-        public void Draw()
+        public void Draw(int x, int y, char sym)
         {
             Console.SetCursorPosition(x, y);
-            Console.Write( sym );
+            Console.Write(sym);
         }
 
-        public void Clear() 
+        public void Clear()
         {
             sym = ' ';
-            Draw();
+            Draw(x, y, sym);
         }
-        public override string ToString() 
+
+        public override string ToString()
         {
-            return x + ", " + ", " + sym;
+            return x + ", " + y + ", " + sym;
         }
     }
 }
